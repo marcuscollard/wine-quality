@@ -50,9 +50,9 @@ def inference_wine():
     now = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
 
     data = {
-        'prediction': pred_qualities[-1],
-        'label': labels.values[-1],
-        'datetime': now,
+        'prediction': [pred_qualities[-1]],
+        'label': [labels.values[-1]],
+        'datetime': [now],
     }
 
     monitor_df = pd.DataFrame(data)
