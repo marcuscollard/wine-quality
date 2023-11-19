@@ -15,11 +15,12 @@ model_dir = model.download()
 model = joblib.load(model_dir + "/iris_model.pkl")
 print("Model downloaded")
 
-def iris(sepal_length, sepal_width, petal_length, petal_width):
+
+def wine(type, fixed_acidity, volatile_acidity, citric_acid, residual_sugar, chlorides, free_sulfur_dioxide, total_sulfur_dioxide, density, pH, sulphates, alcohol):
     print("Calling function")
 #     df = pd.DataFrame([[sepal_length],[sepal_width],[petal_length],[petal_width]], 
-    df = pd.DataFrame([[sepal_length,sepal_width,petal_length,petal_width]], 
-                      columns=['sepal_length','sepal_width','petal_length','petal_width'])
+    df = pd.DataFrame([[type, fixed_acidity, volatile_acidity, citric_acid, residual_sugar, chlorides, free_sulfur_dioxide, total_sulfur_dioxide, density, pH, sulphates, alcohol]], 
+                      columns=['type', 'fixed_acidity', 'volatile_acidity', 'citric_acid', 'residual_sugar', 'chlorides', 'free_sulfur_dioxide', 'total_sulfur_dioxide', 'density', 'pH', 'sulphates', 'alcohol'])
     print("Predicting")
     print(df)
     # 'res' is a list of predictions returned as the label.
@@ -33,17 +34,25 @@ def iris(sepal_length, sepal_width, petal_length, petal_width):
     return img
         
 demo = gr.Interface(
-    fn=iris,
-    title="Iris Flower Predictive Analytics",
-    description="Experiment with sepal/petal lengths/widths to predict which flower it is.",
+    fn=wine,
+    title="Wine Predictor",
+    description="Input Known Wine Features to Deterine the Type",
     allow_flagging="never",
     inputs=[
-        gr.inputs.Number(default=2.0, label="sepal length (cm)"),
-        gr.inputs.Number(default=1.0, label="sepal width (cm)"),
-        gr.inputs.Number(default=2.0, label="petal length (cm)"),
-        gr.inputs.Number(default=1.0, label="petal width (cm)"),
+        gr.Dropdown(["red", "white"], label="Type", info=""),
+        gr.inputs.Number(default=1.0, label="fixed_acidity"),
+        gr.inputs.Number(default=1.0, label="volatile_acidity"),
+        gr.inputs.Number(default=1.0, label="citric_acid"),
+        gr.inputs.Number(default=1.0, label="residual_sugar"),
+        gr.inputs.Number(default=1.0, label="chlorides"),
+        gr.inputs.Number(default=1.0, label="free_sulfur_dioxide"),
+        gr.inputs.Number(default=1.0, label="total_sulfur_dioxide"),
+        gr.inputs.Number(default=1.0, label="density"),
+        gr.inputs.Number(default=1.0, label="pH"),
+        gr.inputs.Number(default=1.0, label="sulphates"),
+        gr.inputs.Number(default=17.0, label="alcohol"),
         ],
-    outputs=gr.Image(type="pil"))
+    outputs=gr.Number(default=1, label="quality"))
 
 demo.launch(debug=True)
 
