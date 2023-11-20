@@ -62,7 +62,10 @@ def inference_wine():
 
     history_df = pd.concat([history_df, monitor_df])
 
-    df_recent = history_df.tail(5)
+    history_df['date_created'] = pd.to_datetime(df['datetime'], dayfirst=True)
+    history_df = history_df.sort_values('date_created', ascending=False)
+    
+    df_recent = history_df.head(5)
     dfi.export(df_recent, './df_recent.png', table_conversion = 'matplotlib')
     dataset_api.upload("./df_recent.png", "Resources/images", overwrite=True)
 
