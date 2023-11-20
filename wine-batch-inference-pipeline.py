@@ -66,7 +66,8 @@ def inference_wine():
     history_df = history_df.sort_values(by=['date_created'], ascending=False)
     
     df_recent = history_df.head(5)
-    dfi.export(df_recent.style.hide(axis='index'), './df_recent.png', table_conversion = 'matplotlib')
+    dfi.export(df_recent.drop(columns='date_created').style.hide(axis='index'), 
+                              './df_recent.png', table_conversion='matplotlib')
     dataset_api.upload("./df_recent.png", "Resources/images", overwrite=True)
 
     predictions = history_df[['prediction']]
