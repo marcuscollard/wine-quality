@@ -62,7 +62,7 @@ def inference_wine():
 
     history_df = pd.concat([history_df, monitor_df])
 
-    history_df['date_created'] = pd.to_datetime(df['datetime'], dayfirst=True)
+    history_df['date_created'] = pd.to_datetime(history_df['datetime'], dayfirst=True)
     history_df = history_df.sort_values(by=['date_created'], ascending=False)
     
     df_recent = history_df.head(5)
