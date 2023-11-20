@@ -33,8 +33,8 @@ The training notebook reads training data from a Feature View in Hopsworks, trai
 
 ## User Interface
 
-A Gradio application is provided to allow users to input or select feature values and predict the quality of a wine using the trained model.
+A [Gradio application](https://huggingface.co/spaces/obama911/wine-quality) is provided to allow users to input or select feature values and predict the quality of a wine using the trained model.
 
 ## Batch Inference Pipeline
 
-A batch inference pipeline predicts the quality of the new wines added, and a monitor application displays the most recent wine quality predictions along with a confusion matrix showing historical prediction performance.
+A batch inference pipeline predicts the quality of the new wines added, and a [monitor application](https://huggingface.co/spaces/obama911/wine-monitor) displays the most recent wine quality predictions along with a confusion matrix showing historical prediction performance.
