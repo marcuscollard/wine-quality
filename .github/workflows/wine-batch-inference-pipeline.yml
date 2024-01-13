@@ -1,31 +1,31 @@
-name: wine-batch-inference-pipeline
+# name: wine-batch-inference-pipeline
 
-on:
-  workflow_run:
-    workflows: [wine-feature-pipeline-daily]
-    types:
-      - completed
+# on:
+#   workflow_run:
+#     workflows: [wine-feature-pipeline-daily]
+#     types:
+#       - completed
 
-jobs:
-  test_schedule:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout repo content
-        uses: actions/checkout@v2
+# jobs:
+#   test_schedule:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: checkout repo content
+#         uses: actions/checkout@v2
 
-      - name: setup python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9.18'
+#       - name: setup python
+#         uses: actions/setup-python@v2
+#         with:
+#           python-version: '3.9.18'
           
-      - name: install python packages
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r ./requirements.txt
+#       - name: install python packages
+#         run: |
+#           python -m pip install --upgrade pip
+#           pip install -r ./requirements.txt
           
-      - name: execute python workflows from bash script
-        env: 
-          HOPSWORKS_API_KEY: ${{ secrets.WINE_API_KEY }}
-        run: |
-          chmod +x run-wine-batch-inference.sh
-          ./run-wine-batch-inference.sh
+#       - name: execute python workflows from bash script
+#         env: 
+#           HOPSWORKS_API_KEY: ${{ secrets.WINE_API_KEY }}
+#         run: |
+#           chmod +x run-wine-batch-inference.sh
+#           ./run-wine-batch-inference.sh
